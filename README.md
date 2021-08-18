@@ -12,9 +12,11 @@ O segundo fator de autenticação utilizado foi o fator de posse, realizado atra
 ## Instalação
 
 Após clonar o repositório a instalação do projeto se dá através da seguinte linha de comando
+
 `npm install --only=prod`
 
 ## Execução
 
 Para iniciar a execução do projeto execute o seguinte comando
+
 `npm start:prod`
