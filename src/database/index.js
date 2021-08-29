@@ -20,23 +20,21 @@ class Database {
 	}
 	
 	async getUserByEmail ({ email }) {
-		const { conn } = this;
-		// TODO
-		let sql = `SELECT FROM Usuario WHERE email = ${prepare(email)}`;
-
-        const result = await promisify(conn.query).bind(conn)(sql);
-        console.log(result);
+		const conn = await this.getConn();
+		const { prepare } = conn;
+		const result = await conn.query(`
+		SELECT FROM Usuario WHERE email = ${prepare(email)}
+		`);
         return result.length > 0 ? result[0]:null;
 	}
 	
 	async setTotpSecret ({ userId, secret }) {
-		const { conn } = this;
-		// TODO
-		let sql = " UPDATE Usuario SET secret=?, WHERE Usuario.id=?";
-        let values = [secret, userId];
-
-		const result = await promisify(conn.query).bind(conn)(sql);
-        console.log(result);
+		const conn = await this.getConn();
+		const { prepare } = conn;
+		const result = await conn.query(`
+		UPDATE Usuario SET
+			${prepare({ secret, userId})}
+		`);
         return result.length > 0 ? result[0]:null;
 	}
 }

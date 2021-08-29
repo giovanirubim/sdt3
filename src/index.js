@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const Database = require('./database/index');
 const express = require('express');
 const path = require('path');
 const webContent = path.join(__dirname, 'web-content');
@@ -12,3 +13,8 @@ app.use(express.static(webContent));
 app.listen(PORT, HOST, () => {
 	console.log('Server started at port ' + PORT);
 });
+
+app.get("/usuario",
+		//param('email'),
+		Database.getUserByEmail('renan_bertolazo@hotmail.com')
+);
