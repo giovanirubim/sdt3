@@ -73,7 +73,7 @@ class Totp {
 		return secretToImage(this.secretObj);
 	}
 	token() {
-		return generateSecret(this.secretObj);
+		return generateToken(this.secretObj);
 	}
 	validate(token) {
 		return validateToken(this.secretObj, token);
