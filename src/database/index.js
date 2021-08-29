@@ -2,29 +2,27 @@ const connector = require('./connector');
 
 class Database {
 	constructor(config) {
-		this.conn = connector.connect(config);
+		this.connPromise = connector.connect(config);
+	}
+
+	getConn() {
+		return this.connPromise;
 	}
 	
 	async addUser ({ name, email, password }) {
-		const { conn } = this;
-		// TODO
-		let sql = "INSERT INTO Usuario(name, email, password) VALUES ?";
-
-        const values = [name, email, password];
-        sql = mysql.format(sql, values);
-
-        const result = await promisify(conn.query).bind(conn)(sql);
-        console.log(result);
-        return result.length > 0 ? result[0]:null;
+		const conn = await this.getConn();
+		const { prepare } = conn;
+		const result = await conn.query(`
+			INSERT INTO Usuario SET
+			${prepare({ name, email, password })}
+		`);
+		return result.insertId;
 	}
 	
 	async getUserByEmail ({ email }) {
 		const { conn } = this;
 		// TODO
-		let sql = "SELECT FROM Usuario WHERE Usuario.email=?";
-
-        const values = [email];
-        sql = mysql.format(sql, values);
+		let sql = `SELECT FROM Usuario WHERE email = ${prepare(email)}`;
 
         const result = await promisify(conn.query).bind(conn)(sql);
         console.log(result);
