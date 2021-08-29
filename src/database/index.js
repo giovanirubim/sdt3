@@ -1,8 +1,9 @@
-const connector = require('./connector');
+const {connect, prepare} = require('./connector');
+
 
 class Database {
 	constructor(config) {
-		this.connPromise = connector.connect(config);
+		this.connPromise = connect(config);
 	}
 
 	getConn() {
@@ -11,7 +12,6 @@ class Database {
 	
 	async addUser ({ name, email, password }) {
 		const conn = await this.getConn();
-		const { prepare } = conn;
 		const result = await conn.query(`
 			INSERT INTO Usuario SET
 			${prepare({ name, email, password })}
@@ -21,16 +21,14 @@ class Database {
 	
 	async getUserByEmail ({ email }) {
 		const conn = await this.getConn();
-		const { prepare } = conn;
 		const result = await conn.query(`
-		SELECT FROM Usuario WHERE email = ${prepare(email)}
+		SELECT * FROM Usuario WHERE email = ${prepare(email)}
 		`);
         return result.length > 0 ? result[0]:null;
 	}
 	
 	async setTotpSecret ({ userId, secret }) {
 		const conn = await this.getConn();
-		const { prepare } = conn;
 		const result = await conn.query(`
 		UPDATE Usuario SET
 			${prepare({ secret, userId})}
