@@ -57,9 +57,12 @@ const generateToken = (secret, delta = 0) => speakeasy.totp({
 });
 
 const validateToken = (secret, token) => {
-	const prev = generateToken(secret, - TOTP_WINDOW);
-	const next = generateToken(secret, + TOTP_WINDOW);
-	return [ prev, next ].includes(token);
+	const tokens = [
+		generateToken(secret, - TOTP_WINDOW),
+		generateToken(secret, + TOTP_WINDOW),
+	];
+	console.log({ tokens, token });
+	return tokens.includes(token);
 };
 
 // Totp class
