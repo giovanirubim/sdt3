@@ -59,7 +59,7 @@ class API {
 	static checkLogin() {
 		return this.get('/api/login');
 	}
-	static logOut() {
+	static logout() {
 		return this.delete('/api/login');
 	}
 	static createOtpStep() {
