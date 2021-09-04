@@ -83,7 +83,7 @@ async function checkLogin({ session }, res) {
 		const user = await database.getUserById(session.userId);
 		res.status(200).json(getUserData(user));
 	} else {
-		res.status(404).end();
+		res.status(204).end();
 	}
 }
 
