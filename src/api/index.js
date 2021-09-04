@@ -17,11 +17,18 @@ const api = express.Router();
 
 api.use(express.json());
 
+const getUserData = (user) => ({
+	id: user.id,
+	name: user.name,
+	email: user.email,
+	hasOtp: !!user.secret,
+});
+
 async function register({ body, session }, res) {
 	const { name, email, password } = body;
 	const user = await database.addUser({ name, email, password });
 	session.userId = user.id;
-	res.status(200).json({ id: user.id });
+	res.status(200).json(getUserData(user));
 }
 
 async function login({ session, body }, res) {
@@ -43,12 +50,7 @@ async function login({ session, body }, res) {
 		}
 	}
 	session.userId = user.id;
-	res.status(200).json({
-		id: user.id,
-		name: user.name,
-		email,
-		hasOtp: !!user.secret,
-	});
+	res.status(200).json(getUserData(user));
 }
 
 async function createOtpStep({ session }, res) {
@@ -79,9 +81,7 @@ async function removeOtpStep({ session }, res) {
 async function checkLogin({ session }, res) {
 	if (session.userId) {
 		const user = await database.getUserById(session.userId);
-		const { id, name, email, secret } = user;
-		const hasOtp = !!secret;
-		res.status(200).json({ id, name, email, hasOtp });
+		res.status(200).json(getUserData(user));
 	} else {
 		res.status(404).end();
 	}
