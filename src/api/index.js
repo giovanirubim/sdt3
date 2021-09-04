@@ -87,7 +87,7 @@ async function checkLogin({ session }, res) {
 	}
 }
 
-async function logOut({ session }, res) {
+async function logout({ session }, res) {
 	session.userId = null;
 	res.status(200).end();
 }
@@ -101,7 +101,7 @@ async function getOtpQRCodeImage({ session }, res) {
 		return res.status(404).end();
 	}
 	const { buffer, mime } = await new Totp(user.secret).toQRCode();
-	res.status(200)
+	res.status(200);
 	res.set({
 		'content-type': mime,
 		'content-length': buffer.length,
@@ -122,7 +122,7 @@ const safe = (method) => async (req, res) => {
 api.post('/api/user', safe(register));
 api.post('/api/login', safe(login));
 api.get('/api/login', safe(checkLogin));
-api.delete('/api/login', safe(logOut));
+api.delete('/api/login', safe(logout));
 api.post('/api/login/otp', safe(createOtpStep));
 api.delete('/api/login/otp', safe(removeOtpStep));
 api.get('/api/login/otp/qr-code', safe(getOtpQRCodeImage));

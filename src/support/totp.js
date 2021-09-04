@@ -36,8 +36,8 @@ const getQRCodeDataURL = (text) => new Promise(
 		text,
 		{
 			errorCorrectionLevel: 'M',
-			width: 512,
-			height: 512,
+			width: 300,
+			height: 300,
 		},
 		(err, data) => err ? fail(err) : done(data),
 	),
