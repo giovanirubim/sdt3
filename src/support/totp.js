@@ -61,7 +61,6 @@ const validateToken = (secret, token) => {
 		generateToken(secret, - TOTP_WINDOW),
 		generateToken(secret, + TOTP_WINDOW),
 	];
-	console.log({ tokens, token });
 	return tokens.includes(token);
 };
 
