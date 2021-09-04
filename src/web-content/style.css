@@ -1,0 +1,72 @@
+* {
+	font-family: monospace;
+}
+body {
+	background-color: #222;
+}
+#leftbar {
+	position: absolute;
+	top: 0px;
+	left: -200px;
+	bottom: 0px;
+	width: 200px;
+	background: #444;
+	font-size: 0px;
+}
+#leftbar button {
+	margin-top: 10px;
+	margin-left: 10px;
+	color: #123;
+	width: 180px;
+	height: 30px;
+	border: none;
+	cursor: pointer;
+}
+#main {
+	position: absolute;
+	padding-top: 200px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	text-align: center;
+}
+#welcome {
+	color: #ccc;
+}
+#login {
+	display: inline-block;
+	background-color: #666;
+	color: #fff;
+	padding: 15px 30px 25px 30px;
+	text-align: left;
+}
+#login .form-item input {
+	width: 200px;
+	border: none;
+	height: 24px;
+	padding: 0px 0px 0px 5px;
+}
+#login .form-item input[type="button"] {
+	width: 205px;
+	cursor: pointer;
+	color: #444;
+}
+#login .form-item {
+	margin-top: 10px;
+}
+#qrcode {
+	font-size: 0px;
+	display: inline-block;
+}
+#qrcode .button-line {
+	margin-top: 15px;
+	text-align: right;
+}
+#qrcode .button-line input[type="button"] {
+	height: 30px;
+	width: 75px;
+	border: none;
+	background-color: #666;
+	color: #fff;
+}
