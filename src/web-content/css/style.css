@@ -34,25 +34,26 @@ body {
 #welcome {
 	color: #ccc;
 }
-#login {
+#login,
+#register {
 	display: inline-block;
 	background-color: #666;
 	color: #fff;
 	padding: 15px 30px 25px 30px;
 	text-align: left;
 }
-#login .form-item input {
+.form-item input {
 	width: 200px;
 	border: none;
 	height: 24px;
 	padding: 0px 0px 0px 5px;
 }
-#login .form-item input[type="button"] {
+.form-item input[type="button"] {
 	width: 205px;
 	cursor: pointer;
 	color: #444;
 }
-#login .form-item {
+.form-item {
 	margin-top: 10px;
 }
 #qrcode {

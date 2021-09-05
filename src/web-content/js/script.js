@@ -55,7 +55,7 @@ $(document).ready(async () => {
 		await loadWelcome();
 	}
 
-	$('#main').on('click', '#login input[type="button"]', async () => {
+	$('#main').on('click', '#login input[value="Login"]', async () => {
 		const data = getData();
 		if (data.token) {
 			data.token = data.token.replace(/\s/g, '');
@@ -80,6 +80,16 @@ $(document).ready(async () => {
 	});
 
 	$('#main').on('click', '[value="Ok"]', async () => {
+		await loadWelcome();
+	});
+
+	$('#main').on('click', '#goToRegister', async () => {
+		await loadPage('register');
+	});
+
+	$('#main').on('click', '#register [value="Register"]', async () => {
+		login = await API.register(getData());
+		showLeftBar();
 		await loadWelcome();
 	});
 
